@@ -15,6 +15,15 @@ using namespace QinBuRua::math_solver::details;
 namespace stdv = std::views;
 namespace stdr = std::ranges;
 
+BigInt::BigInt(const bool& bool_value) {
+   if (bool_value != false) {
+      _sign = 1;
+      _value.push_back(1);
+   }
+
+   assert(IsNormal());
+}
+
 BigInt& BigInt::operator+=(const BigInt& other) {
    if (_sign == other._sign) {
       AbsSelfAdd(other);
@@ -55,6 +64,24 @@ std::strong_ordering BigInt::operator<=>(const BigInt& other) const noexcept {
    return _sign == -1
              ? (0 <=> absCompared)
              : absCompared;
+}
+
+BigInt QinBuRua::math_solver::details::operator+(const BigInt& a, const BigInt& b) {
+   assert(a.IsNormal());
+   assert(b.IsNormal());
+
+   if (a.IsZero()) {
+      return b;
+   }
+   if (b.IsZero()) {
+      return a;
+   }
+
+   if (a._sign == b._sign) {
+
+   }
+   assert("Incomplete function!!!");
+   return BigInt{};
 }
 
 bool BigInt::IsNormal() const {
@@ -111,22 +138,4 @@ void BigInt::AbsSelfAdd(const BigInt& other) {
       });
 
    Normalize();
-}
-
-BigInt QinBuRua::math_solver::details::operator+(const BigInt& a, const BigInt& b) {
-   assert(a.IsNormal());
-   assert(b.IsNormal());
-
-   if (a.IsZero()) {
-      return b;
-   }
-   if (b.IsZero()) {
-      return a;
-   }
-
-   if (a._sign == b._sign) {
-
-   }
-   assert("Incomplete function!!!");
-   return BigInt{};
 }

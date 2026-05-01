@@ -23,6 +23,11 @@ public:
    BigInt& operator=(BigInt&&) noexcept = default;
    BigInt& operator=(const BigInt&)     = default;
 
+   template<typename T>
+      requires (std::is_integral_v<T> && !std::is_same_v<std::remove_cv_t<T>, bool>)
+   explicit BigInt(const T& value);
+   explicit BigInt(const bool& bool_value);
+
    BigInt& operator+=(const BigInt&);
 
    [[nodiscard]] bool Positive() const;
@@ -37,6 +42,8 @@ private:
    SignType _sign = 0;
    AbsValueType _value{};
 
+   static constexpr std::uint64_t UINT64_MASK = 0xffffffffffffffff;
+
    [[nodiscard]] bool IsNormal() const;
    void Normalize();
 
@@ -47,5 +54,7 @@ private:
 BigInt operator+(const BigInt& a, const BigInt& b);
 
 }
+
+#include "../../src/include_src/details/BigInt.inl"
 
 #endif //QINBURUA_MATHSOLVER_INCLUDES_DETAILS_BIGNUMBER_BIGINT_H

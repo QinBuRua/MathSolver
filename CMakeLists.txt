@@ -8,7 +8,8 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 add_library(MathSolverLib
         src/include_src/details/BigInt.cpp
         src/include_src/details/BigFixed.cpp
-        src/include_src/details/RealNumber.cpp)
+        src/include_src/details/RealNumber.cpp
+)
 target_include_directories(MathSolverLib PUBLIC includes)
 
 add_executable(AppTest

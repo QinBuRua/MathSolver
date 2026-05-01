@@ -34,7 +34,7 @@ public:
    friend BigInt operator+(const BigInt& a, const BigInt& b);
 
 private:
-   SignType _sign = 1;
+   SignType _sign = 0;
    AbsValueType _value{};
 
    [[nodiscard]] bool IsNormal() const;
